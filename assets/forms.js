@@ -111,7 +111,9 @@ var RELAY_BASE = /\.pages\.dev$/.test(location.hostname) ? '' : 'https://oasis-w
     var sig = ((attr.utm_source || '') + ' ' + (attr.utm_medium || '')).toLowerCase();
     var isGoogle = !!(attr.gclid || attr.gbraid || attr.wbraid) || /google|gads|adwords|cpc|ppc/.test(sig);
     var isMeta = !!attr.fbclid || /meta|facebook|\bfb\b|instagram|\big\b/.test(sig);
-    var cal = root.getAttribute(isGoogle ? 'data-cal-aw' : (isMeta ? 'data-cal-m' : 'data-cal-o')) || root.getAttribute('data-cal-o');
+    // AW for Google clicks, O for everything else. The M calendar is the Meta FUNNEL's (its own confirmation
+    // page), so website visitors never book on it — that keeps the funnel's redirect settings untouched.
+    var cal = root.getAttribute(isGoogle ? 'data-cal-aw' : 'data-cal-o') || root.getAttribute('data-cal-o');
     var q = [];
     var add = function (k, v) { if (v) q.push(k + '=' + encodeURIComponent(v)); };
     add('first_name', payload.firstName); add('last_name', payload.lastName);

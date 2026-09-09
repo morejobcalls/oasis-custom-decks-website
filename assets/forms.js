@@ -117,7 +117,15 @@ var RELAY_BASE = /\.pages\.dev$/.test(location.hostname) ? '' : 'https://oasis-w
     var q = [];
     var add = function (k, v) { if (v) q.push(k + '=' + encodeURIComponent(v)); };
     add('first_name', payload.firstName); add('last_name', payload.lastName);
+    add('full_name', (payload.firstName + ' ' + payload.lastName).trim()); add('name', (payload.firstName + ' ' + payload.lastName).trim());
     add('email', payload.email); add('phone', payload.phone);
+    // Booking form asks for Project Scope ("I'm Interested In…" picklist) + Address again — prefill both from the survey.
+    var scopeMap = { 'New Deck': 'New Deck', 'Deck Resurface': 'Deck Resurface', 'Covered Deck': 'New Roof Over Deck', 'Screened Porch': 'Screened Porch', 'Other': 'Other' };
+    var scopeKey = Object.keys(scopeMap).filter(function (k) { return (payload.project_type || '').indexOf(k) === 0; })[0];
+    if (scopeKey) add('im_interested_in', scopeMap[scopeKey]);
+    var fullAddr = [payload.address, payload.city, payload.state, payload.zip].filter(Boolean).join(', ');
+    add('address', fullAddr); add('address1', payload.address); add('full_address', fullAddr);
+    add('city', payload.city); add('state', payload.state); add('postal_code', payload.zip);
     ['gclid', 'gbraid', 'wbraid', 'fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { add(k, attr[k]); });
     var src = root.getAttribute('data-book-base') + cal + (q.length ? '?' + q.join('&') : '');
     var frame = root.querySelector('.f-book-frame');

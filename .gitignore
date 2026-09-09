@@ -1,0 +1,11 @@
+_dev/
+_worker.js
+_worker.js.mpc-reference
+attribution.js.mpc-reference
+_headers
+_redirects
+*.md
+._*
+.DS_Store
+node_modules/
+wrangler.toml

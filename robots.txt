@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you/
+Disallow: /free-estimate/
+Sitemap: https://oasiscustomdecks.com/sitemap.xml

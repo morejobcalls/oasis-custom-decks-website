@@ -1,9 +1,9 @@
 // Oasis — multi-step estimate form engine.
 // Every form with [data-oasis-form] gets: step navigation, option buttons that
-// record exact GHL picklist strings, validation, POST to /api/lead, redirect
+// record exact GHL picklist strings, validation, POST to /api/lead, then the booking calendar inline
 // Lead relay lives on the Cloudflare Pages worker. When this site is served from
 // GitHub Pages (oasiscustomdecks.com) the relay is cross-origin — CORS allowlist in _worker.js.
-var RELAY_BASE = /\.pages\.dev$|^localhost$/.test(location.hostname) ? '' : 'https://oasis-website-s94.pages.dev';
+var RELAY_BASE = /\.pages\.dev$/.test(location.hostname) ? '' : 'https://oasis-website-s94.pages.dev';
 // to /thank-you/. Attribution (gclid/UTMs) rides in from attribution.js.
 (function () {
   document.querySelectorAll('[data-oasis-form]').forEach(initForm);
@@ -80,16 +80,13 @@ var RELAY_BASE = /\.pages\.dev$|^localhost$/.test(location.hostname) ? '' : 'htt
       }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
           if (res.ok) {
-            try {
-              sessionStorage.setItem('oasis_lead', '1');
-              // Enhanced-conversions payload for /thank-you/ (gtag 'user_data'); hashed by gtag, never sent raw to Google.
-              var digits = phone.replace(/\D/g, '');
-              var ud = { phone_number: '+' + (digits.length === 10 ? '1' + digits : digits),
-                address: { first_name: payload.firstName, last_name: payload.lastName, street: address, city: city, region: state, postal_code: zip.trim(), country: 'US' } };
-              if (email) ud.email = email;
-              sessionStorage.setItem('oasis_lead_ud', JSON.stringify(ud));
-            } catch (e) {}
-            location.href = '/thank-you/';
+            // Enhanced-conversions payload (gtag 'user_data'); hashed by gtag, never sent raw to Google.
+            var digits = phone.replace(/\D/g, '');
+            var ud = { phone_number: '+' + (digits.length === 10 ? '1' + digits : digits),
+              address: { first_name: payload.firstName, last_name: payload.lastName, street: address, city: city, region: state, postal_code: zip.trim(), country: 'US' } };
+            if (email) ud.email = email;
+            try { sessionStorage.setItem('oasis_lead', '1'); sessionStorage.setItem('oasis_lead_ud', JSON.stringify(ud)); } catch (e) {}
+            showBooking(root, payload, ud);
           } else {
             throw new Error(res.j.error || 'send failed');
           }
@@ -104,6 +101,45 @@ var RELAY_BASE = /\.pages\.dev$|^localhost$/.test(location.hostname) ? '' : 'htt
     show(0);
   }
 
+
+  // Final step: the GHL booking calendar opens inline (no redirect). Calendar picked per channel so the
+  // booking lands on the matching "AW | / M | / O |" calendar (reporting keys on those prefixes).
+  // Contact fields are prefilled through the widget's query params; GHL dedupes on phone/email so the
+  // booking attaches to the contact the relay just created. Google conversion fires here (was /thank-you/).
+  function showBooking(root, payload, ud) {
+    var attr = window.oasisAttribution ? window.oasisAttribution() : {};
+    var sig = ((attr.utm_source || '') + ' ' + (attr.utm_medium || '')).toLowerCase();
+    var isGoogle = !!(attr.gclid || attr.gbraid || attr.wbraid) || /google|gads|adwords|cpc|ppc/.test(sig);
+    var isMeta = !!attr.fbclid || /meta|facebook|\bfb\b|instagram|\big\b/.test(sig);
+    var cal = root.getAttribute(isGoogle ? 'data-cal-aw' : (isMeta ? 'data-cal-m' : 'data-cal-o')) || root.getAttribute('data-cal-o');
+    var q = [];
+    var add = function (k, v) { if (v) q.push(k + '=' + encodeURIComponent(v)); };
+    add('first_name', payload.firstName); add('last_name', payload.lastName);
+    add('email', payload.email); add('phone', payload.phone);
+    ['gclid', 'gbraid', 'wbraid', 'fbclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) { add(k, attr[k]); });
+    var src = root.getAttribute('data-book-base') + cal + (q.length ? '?' + q.join('&') : '');
+    var frame = root.querySelector('.f-book-frame');
+    var ifr = document.createElement('iframe');
+    ifr.src = src; ifr.setAttribute('allow', 'payment'); ifr.setAttribute('scrolling', 'no');
+    ifr.id = cal + '_' + Date.now(); ifr.title = 'Schedule your custom design meeting';
+    frame.innerHTML = ''; frame.appendChild(ifr);
+    if (!document.querySelector('script[data-ghl-embed]')) {
+      var sc = document.createElement('script'); sc.src = root.getAttribute('data-book-js'); sc.setAttribute('data-ghl-embed', '1'); document.body.appendChild(sc);
+    }
+    var steps = Array.prototype.slice.call(root.querySelectorAll('.f-step'));
+    var bars = Array.prototype.slice.call(root.querySelectorAll('.f-progress i'));
+    steps.forEach(function (s) { s.classList.toggle('on', s.hasAttribute('data-book')); });
+    bars.forEach(function (b) { b.classList.add('done'); });
+    root.classList.add('booking');
+    var t = root.querySelector('.f-title'); if (t) t.style.display = 'none';
+    try { root.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) {}
+    try {
+      if (window.gtag && window.__convLead) {
+        gtag('set', 'user_data', ud);
+        gtag('event', 'conversion', { send_to: window.__convLead });
+      }
+    } catch (e) {}
+  }
 
   // Google Places autocomplete on [data-places] inputs — active only when the
   // Maps script is loaded (MAPS_KEY set in build.mjs). Fills hidden city/state/zip.

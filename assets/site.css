@@ -117,6 +117,13 @@ section.tight{padding:64px 0}
 .f-progress{display:flex;gap:6px;margin:2px 0 20px}
 .f-progress i{height:3px;flex:1;border-radius:2px;background:var(--line);transition:background .3s ease}
 .f-progress i.done{background:var(--teal-deep)}
+.f-book-in{margin:0 0 6px;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--teal-deep)}
+.f-book-h{margin:0 0 8px;font-size:1.28rem;line-height:1.2}
+.f-book-sub{margin:0 0 14px;font-size:.9rem;color:var(--ink-soft);line-height:1.5}
+.f-book-frame{margin:0 -12px}
+.f-book-frame iframe{display:block;width:100%;min-height:640px;border:0}
+.form-card.booking{padding:26px 22px 22px}
+.form-card{scroll-margin-top:96px}
 .opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;
   padding:14px 18px;margin:10px 0;font:inherit;font-weight:560;font-size:.96rem;color:var(--ink);cursor:pointer;
   transition:border-color .15s ease,background .15s ease,box-shadow .15s ease}

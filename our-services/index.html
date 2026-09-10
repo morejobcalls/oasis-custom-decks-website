@@ -14,12 +14,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=Figtree:wght@400..800&display=swap">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="/assets/site.css?v=mtw2s0g5">
+<link rel="stylesheet" href="/assets/site.css?v=mtw338we">
 
 
-<script defer src="/assets/attribution.js?v=mtw2s0g5"></script>
-<script defer src="/assets/forms.js?v=mtw2s0g5"></script>
-<script defer src="/assets/motion.js?v=mtw2s0g5"></script>
+<script defer src="/assets/attribution.js?v=mtw338we"></script>
+<script defer src="/assets/forms.js?v=mtw338we"></script>
+<script defer src="/assets/motion.js?v=mtw338we"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"Oasis Custom Decks","url":"https://oasiscustomdecks.com","telephone":"+17248887288","email":"jacob@oasiscustomdecks.com","image":"https://oasiscustomdecks.com/assets/img/DJI_0023.webp","address":{"@type":"PostalAddress","addressLocality":"Seven Fields","addressRegion":"PA","addressCountry":"US"},"areaServed":[{"@type":"City","name":"Adams Township, PA"},{"@type":"City","name":"Aleppo Township, PA"},{"@type":"City","name":"Beaver, PA"},{"@type":"City","name":"Brighton Township, PA"},{"@type":"City","name":"Butler, PA"},{"@type":"City","name":"Cranberry Township, PA"},{"@type":"City","name":"Evans City, PA"},{"@type":"City","name":"Hampton Township, PA"},{"@type":"City","name":"Harmony, PA"},{"@type":"City","name":"Mars, PA"},{"@type":"City","name":"Marshall Township, PA"},{"@type":"City","name":"McKnight, PA"},{"@type":"City","name":"Moon, PA"},{"@type":"City","name":"Pine Township, PA"},{"@type":"City","name":"Portersville, PA"},{"@type":"City","name":"Richland Township, PA"},{"@type":"City","name":"Robinson, PA"},{"@type":"City","name":"Ross Township, PA"},{"@type":"City","name":"Seven Fields, PA"},{"@type":"City","name":"Sewickley, PA"},{"@type":"City","name":"Sewickley Heights, PA"},{"@type":"City","name":"Sewickley Hills, PA"},{"@type":"City","name":"Treesdale, PA"},{"@type":"City","name":"Warrendale, PA"},{"@type":"City","name":"Wexford, PA"},{"@type":"City","name":"Zelienople, PA"}],"founder":{"@type":"Person","name":"Jacob Weaver"},"slogan":"Veteran-owned custom deck builder serving Butler County and the greater Pittsburgh area"}</script>
 </head>
 <body>
@@ -27,8 +27,46 @@
 <a href="/" aria-label="Oasis Custom Decks home"><img class="logo" src="/assets/img/body-image_oasis-custom-decks-navigation-logo.png" alt="Oasis Custom Decks"></a>
 <button class="menu-btn" aria-expanded="false" aria-label="Menu">Menu</button>
 <nav class="nav"><a href="/our-services/" aria-current="page">Services</a><a href="/gallery/">Gallery</a><a href="/reviews/">Reviews</a><a href="/about-us/">About</a><a href="/our-service-areas/">Service Areas</a><a href="/contact-us/">Contact</a></nav>
-<a class="btn" href="/free-estimate/">Get a Free Estimate</a>
+<a class="btn" href="/free-estimate/" data-open-estimate>Get a Free Estimate</a>
 </div></header>
+<div class="modal" id="estimate-modal" hidden role="dialog" aria-modal="true" aria-label="Request your free estimate">
+<div class="modal-card"><button type="button" class="modal-x" aria-label="Close">&times;</button>
+<div class="form-card" id="estimate-modal-form" data-oasis-form data-book-base="https://api.seasonproofgrowth.com/widget/booking/" data-book-js="https://api.seasonproofgrowth.com/js/form_embed.js" data-cal-o="rYxZitGLLyTQAW8y66uX" data-cal-aw="63Jyt0HwzKb98avcQwE7" data-cal-m="y8ZTkpwTmG8PeLjd9RE9">
+<h3 class="f-title">Request Your Custom Design Meeting & Free Estimate</h3>
+<div class="f-progress"><i></i><i></i><i></i><i></i></div>
+<div class="f-step on" data-field="project_type">
+  <label class="fl">What best describes your project?</label>
+  <button type="button" class="opt" data-value="New Deck (I don’t have an existing deck)">New deck — I don’t have one yet</button><button type="button" class="opt" data-value="Deck Resurface (repair or replace my deck or porch)">Repair / replace my deck or porch</button><button type="button" class="opt" data-value="Covered Deck (add a roof to cover my deck)">Covered deck — add a roof</button><button type="button" class="opt" data-value="Screened Porch (built on a new or existing deck)">Screened porch</button><button type="button" class="opt" data-value="Other (I am looking for something else)">Something else</button>
+</div>
+<div class="f-step" data-field="timeline">
+  <label class="fl">When are you hoping to have it completed?</label>
+  <button type="button" class="opt" data-value="Within the next 30 days">Within the next 30 days</button><button type="button" class="opt" data-value="1–3 months">1–3 months</button><button type="button" class="opt" data-value="3–6 months">3–6 months</button><button type="button" class="opt" data-value="6+ months">6+ months</button><button type="button" class="opt" data-value="Just exploring options">Just exploring options</button>
+  <button type="button" class="f-back">&larr; Back</button>
+</div>
+<div class="f-step">
+  <label class="fl" for="f-name">Name</label><input class="fi" id="f-name" name="name" autocomplete="name" placeholder="Your name">
+  <label class="fl" for="f-phone">Phone</label><input class="fi" id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="(724) 555-0123">
+  <label class="fl" for="f-email">Email</label><input class="fi" id="f-email" name="email" type="email" autocomplete="email" placeholder="you@email.com">
+  <label class="fl" for="f-address">Project address</label><input class="fi" id="f-address" name="address" autocomplete="street-address" placeholder="Street address, town" data-places>
+  <input type="hidden" name="city"><input type="hidden" name="state"><input type="hidden" name="zip">
+  <label style="display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:.78rem;color:var(--ink-soft);line-height:1.5">
+    <input type="checkbox" name="consent" style="margin-top:3px">
+    <span>I agree to receive calls and text messages from Oasis Custom Decks about my estimate request. Message &amp; data rates may apply. Reply STOP to opt out. Consent is not a condition of purchase.</span>
+  </label>
+  <div class="f-err" role="alert"></div>
+  <button type="button" class="btn big" style="width:100%;margin-top:12px" data-submit data-label="Get My Free Estimate">Get My Free Estimate</button>
+  <button type="button" class="f-back">&larr; Back</button>
+  <p class="f-note">Takes 30 seconds. No pressure, no spam — just a real estimate from a local, veteran-owned builder.</p>
+</div>
+<div class="f-step f-book" data-book>
+  <p class="f-book-in">You're in ✔ — Jake's team has your request.</p>
+  <h3 class="f-book-h">Schedule your custom design meeting &amp; free estimate now</h3>
+  <p class="f-book-sub">Pick the day and time that works for you. We come to you, measure the space, and you get a real quote — most times the same day.</p>
+  <div class="f-book-frame"></div>
+  <p class="f-note">Prefer to talk first? Call or text <a href="tel:+17248887288">(724) 888-7288</a>.</p>
+</div>
+</div>
+</div></div>
 <section><div class="wrap">
 <p class="eyebrow">Services</p>
 <h1>What we build</h1>
@@ -38,7 +76,7 @@
 </div></div></section>
 <section class="band"><div class="wrap">
 <h2>Ready to love your backyard?</h2><p class="sub">Free on-site design meeting and estimate. Veteran-owned, TrexPro Platinum certified, and backed by 31 five-star reviews.</p>
-<a class="btn big" href="/free-estimate/">Get My Free Estimate</a>
+<a class="btn big" href="/free-estimate/" data-open-estimate>Get My Free Estimate</a>
 <p style="margin-top:14px"><a href="tel:+17248887288" style="color:#fff;font-weight:700">Or call (724) 888-7288</a></p>
 </div></section>
 <footer><div class="f-grid">
@@ -46,7 +84,7 @@
 <p>Veteran-owned custom deck builder with 40+ years of combined industry experience, serving Butler County and the greater Pittsburgh area. TrexPro Platinum certified.</p></div>
 <div><strong>Navigation</strong><br><br>
 <a href="/our-services/">Services</a><br><a href="/gallery/">Gallery</a><br><a href="/reviews/">Reviews</a><br>
-<a href="/about-us/">About Us</a><br><a href="/careers/">Careers</a><br><a href="/free-estimate/">Free Estimate</a></div>
+<a href="/about-us/">About Us</a><br><a href="/careers/">Careers</a><br><a href="/free-estimate/" data-open-estimate>Free Estimate</a></div>
 <div><strong>Contact</strong><br><br>
 <a href="tel:+17248887288">(724) 888-7288</a><br><a href="mailto:jacob@oasiscustomdecks.com">jacob@oasiscustomdecks.com</a><br>Seven Fields, Butler County, PA</div>
 </div>

@@ -199,6 +199,24 @@ var RELAY_BASE = /\.pages\.dev$/.test(location.hostname) ? '' : 'https://oasis-w
     }
   }
 
+  // Estimate pop-up (inner pages). If the page already shows the survey (homepage hero, contact), scroll to it instead.
+  var modal = document.getElementById('estimate-modal');
+  if (modal) {
+    var lastFocus = null;
+    function openModal(e) {
+      var inline = document.getElementById('estimate');
+      if (inline && inline.offsetParent !== null) { e.preventDefault(); inline.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+      e.preventDefault(); lastFocus = document.activeElement;
+      modal.hidden = false; document.body.classList.add('modal-open');
+      requestAnimationFrame(function () { modal.classList.add('on'); var first = modal.querySelector('.f-step.on .opt, .f-step.on input'); if (first) first.focus({ preventScroll: true }); });
+    }
+    function closeModal() { modal.classList.remove('on'); document.body.classList.remove('modal-open'); setTimeout(function () { modal.hidden = true; }, 220); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+    document.querySelectorAll('[data-open-estimate]').forEach(function (a) { a.addEventListener('click', openModal); });
+    modal.querySelector('.modal-x').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+  }
+
   // mobile nav
   var mb = document.querySelector('.menu-btn');
   if (mb) mb.addEventListener('click', function () {

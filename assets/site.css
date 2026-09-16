@@ -349,3 +349,19 @@ html.js .gx-hero .bg{animation:gx-zoom 9s cubic-bezier(.22,1,.36,1) forwards}
 .modal-x:hover{background:var(--teal-wash);border-color:var(--teal-deep)}
 body.modal-open{overflow:hidden}
 @media(max-width:900px){.modal{padding:0;align-items:flex-end}.modal-card{max-width:none;max-height:100vh;border-radius:18px 18px 0 0}.modal-card .form-card{border-radius:18px 18px 0 0;padding-top:34px}}
+
+/* ---------- FAQ (/frequently-asked-questions/) ---------- */
+.faq-toc{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 8px}
+.faq-toc a{font-size:.86rem;font-weight:600;color:var(--teal-ink);text-decoration:none;background:var(--teal-wash);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.faq-toc a:hover{border-color:var(--teal-deep)}
+.faq-h{margin:48px 0 14px;scroll-margin-top:110px}
+.faq{display:flex;flex-direction:column;gap:10px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);scroll-margin-top:110px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 52px 18px 22px;font-weight:700;font-size:1.02rem;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:1.5rem;font-weight:400;color:var(--coral-deep);line-height:1}
+.faq details[open] summary::after{content:"\2212"}
+.faq summary:hover{color:var(--teal-ink)}
+.faq summary:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;border-radius:12px}
+.faq details p{margin:0;padding:0 22px 20px;color:var(--ink-soft);line-height:1.75}
+@media(max-width:600px){.faq summary{padding:16px 46px 16px 16px;font-size:.98rem}.faq details p{padding:0 16px 18px}}

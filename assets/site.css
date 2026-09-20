@@ -365,3 +365,13 @@ body.modal-open{overflow:hidden}
 .faq summary:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;border-radius:12px}
 .faq details p{margin:0;padding:0 22px 20px;color:var(--ink-soft);line-height:1.75}
 @media(max-width:600px){.faq summary{padding:16px 46px 16px 16px;font-size:.98rem}.faq details p{padding:0 16px 18px}}
+
+/* Financing (/financing/) — Momnt widget block + required Equal Housing Lender / disclaimer footer. */
+.fin-cta{margin:28px 0 8px;padding:24px;border:1px solid #e5e0d8;border-radius:14px;background:#faf8f5}
+.fin-cta #momnt-widget{min-height:52px}
+.fin-alt{margin:12px 0 0;font-size:.9rem;opacity:.75}
+.fin-notes{margin:0 0 8px;padding-left:20px}
+.fin-notes li{margin-bottom:10px}
+.fin-legal{margin-top:36px;padding-top:20px;border-top:1px solid #e5e0d8}
+.fin-legal img{display:block;height:32px;width:auto;margin-bottom:12px}
+.fin-legal p{margin:0;font-size:.8rem;line-height:1.55;opacity:.7}

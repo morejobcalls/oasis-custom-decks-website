@@ -120,7 +120,7 @@ var RELAY_BASE = /\.pages\.dev$/.test(location.hostname) ? '' : 'https://oasis-w
     add('full_name', (payload.firstName + ' ' + payload.lastName).trim()); add('name', (payload.firstName + ' ' + payload.lastName).trim());
     add('email', payload.email); add('phone', payload.phone);
     // Booking form asks for Project Scope ("I'm Interested In…" picklist) + Address again — prefill both from the survey.
-    var scopeMap = { 'New Deck': 'New Deck', 'Deck Resurface': 'Deck Resurface', 'Covered Deck': 'New Roof Over Deck', 'Screened Porch': 'Screened Porch', 'Other': 'Other' };
+    var scopeMap = { 'New Deck': 'New Deck', 'Deck Repair': 'Deck Repair', 'Deck Rebuild': 'Deck Rebuild', 'Deck Replacement': 'Deck Replacement', 'Covered Deck': 'New Roof Over Deck', 'Screened Porch': 'Screened Porch', 'Other': 'Other' };
     var scopeKey = Object.keys(scopeMap).filter(function (k) { return (payload.project_type || '').indexOf(k) === 0; })[0];
     if (scopeKey) add('im_interested_in', scopeMap[scopeKey]);
     var fullAddr = [payload.address, payload.city, payload.state, payload.zip].filter(Boolean).join(', ');

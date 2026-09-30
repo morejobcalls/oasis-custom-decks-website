@@ -204,6 +204,9 @@ footer strong{color:#fff;font-size:.76rem;letter-spacing:.18em;text-transform:up
    who've opted out. Curves: ease-out-quint for "settle", long/slow on the
    photo for a cinematic feel. */
 
+/* New-build LP fit note — stays visible on mobile (sub is hidden there) */
+.lp-fit{margin:14px 0 4px;padding:10px 14px;border-left:3px solid #FFC5AD;background:rgba(0,0,0,.28);color:#fff;font-size:.9rem;line-height:1.45;border-radius:0 8px 8px 0;max-width:560px}
+
 /* Google LP — mobile compaction + sticky CTA (2026-09-04 CRO pass) */
 .m-cta{display:none}
 @media(max-width:900px){

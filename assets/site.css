@@ -19,7 +19,7 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--sand);color:var(--ink);font:16.5px/1.75 Figtree,system-ui,-apple-system,sans-serif;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 ::selection{background:var(--teal-wash);color:var(--teal-ink)}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:var(--teal-deep);text-underline-offset:3px;text-decoration-thickness:1px}
 h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.12;letter-spacing:-.022em;color:var(--ink);text-wrap:balance;margin:0 0 .45em;font-variation-settings:"opsz" 90}
 h1{font-size:clamp(2.3rem,5vw,3.7rem);font-weight:520;line-height:1.08}
@@ -378,3 +378,7 @@ body.modal-open{overflow:hidden}
 .fin-legal{margin-top:36px;padding-top:20px;border-top:1px solid #e5e0d8}
 .fin-legal img{display:block;height:32px;width:auto;margin-bottom:12px}
 .fin-legal p{margin:0;font-size:.8rem;line-height:1.55;opacity:.7}
+
+/* SEO audit 2026-10-20: form title is a <p> (was an <h3> sitting above every H2), same look */
+.form-card .f-title{font-family:Fraunces,Georgia,serif;font-size:1.28rem;font-weight:600;line-height:1.12;letter-spacing:-.01em;color:var(--ink);margin:0 0 .45em;font-variation-settings:"opsz" 90;text-wrap:balance}
+.form-card .f-book-h{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.01em;color:var(--ink);font-variation-settings:"opsz" 90;text-wrap:balance}

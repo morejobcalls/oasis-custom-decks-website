@@ -1,5 +1,22 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you/
-Disallow: /free-estimate/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://oasiscustomdecks.com/sitemap.xml
